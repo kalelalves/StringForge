@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HandlingString\HandlingString.csproj" />
+    <ProjectReference Include="..\StringForge\StringForge.csproj" />
   </ItemGroup>
 
 </Project>

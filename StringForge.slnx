@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="StringForge/StringForge.csproj" />
+  <Project Path="StringForge.Tests/StringForge.Tests.csproj" />
+</Solution>

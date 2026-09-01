@@ -1,9 +1,9 @@
-# HandlingString
+# StringForge
 
 Uma biblioteca .NET pequena, direta e pronta para o dia a dia de quem precisa manipular textos sem reescrever os mesmos helpers em todo projeto.
 
 ```csharp
-using HandlingString;
+using StringForge;
 
 var slug = "Funções em C#: Manipulando Strings com Maestria".ToSlug();
 // funcoes-em-c-manipulando-strings-com-maestria
@@ -17,20 +17,20 @@ var name = "  kalel   alves  ".NormalizeWhitespace().ToTitleCase();
 
 ## Por que existe?
 
-Manipular strings em C# costuma envolver as mesmas operacoes basicas: concatenar, substituir, buscar, dividir, formatar, validar prefixos/sufixos e normalizar textos. A proposta do HandlingString e empacotar esses casos em metodos expressivos, testados e faceis de descobrir.
+Manipular strings em C# costuma envolver as mesmas operacoes basicas: concatenar, substituir, buscar, dividir, formatar, validar prefixos/sufixos e normalizar textos. A proposta do StringForge e empacotar esses casos em metodos expressivos, testados e faceis de descobrir.
 
 ## Instalacao
 
 Enquanto o pacote nao estiver publicado no NuGet, use referencia direta ao projeto:
 
 ```bash
-dotnet add reference ../HandlingString/HandlingString.csproj
+dotnet add reference ../StringForge/StringForge.csproj
 ```
 
 Quando publicar:
 
 ```bash
-dotnet add package HandlingString
+dotnet add package StringForge
 ```
 
 ## Metodos
@@ -68,7 +68,7 @@ dotnet add package HandlingString
 - Publicar um artigo curto: "20 extensions de string em C# que eu cansei de reescrever".
 - Adicionar benchmarks com BenchmarkDotNet quando a API estabilizar.
 - Publicar no NuGet e adicionar badges de version, build e coverage no README.
-- Fazer posts com antes/depois: codigo verboso em C# puro vs. uma linha com HandlingString.
+- Fazer posts com antes/depois: codigo verboso em C# puro vs. uma linha com StringForge.
 
 ## Referencias de estudo
 

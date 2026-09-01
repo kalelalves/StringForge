@@ -2,7 +2,7 @@ using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace HandlingString;
+namespace StringForge;
 
 /// <summary>
 /// Helpful, chainable extensions for common string manipulation tasks.

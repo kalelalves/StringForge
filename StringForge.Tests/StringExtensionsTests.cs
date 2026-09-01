@@ -1,4 +1,4 @@
-namespace HandlingString.Tests;
+namespace StringForge.Tests;
 
 public class StringExtensionsTests
 {

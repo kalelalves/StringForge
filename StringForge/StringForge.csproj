@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
-    <PackageId>HandlingString</PackageId>
+    <PackageId>StringForge</PackageId>
     <Version>0.1.0</Version>
     <Authors>Kalel Alves</Authors>
     <Description>Extensoes modernas, testadas e faceis de usar para manipulacao de strings em .NET.</Description>
