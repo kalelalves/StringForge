@@ -13,6 +13,12 @@ var phone = "+55 (11) 98765-4321".OnlyDigits();
 
 var name = "  kalel   alves  ".NormalizeWhitespace().ToTitleCase();
 // Kalel Alves
+
+var hasEmoji = "Deploy pronto 🚀".HasEmoji();
+// true
+
+var binary = 'A'.ToBinary();
+// 01000001
 ```
 
 ## Por que existe?
@@ -42,6 +48,12 @@ dotnet add package StringForge
 | `NormalizeWhitespace()` | `"a   b\nc".NormalizeWhitespace()` | `"a b c"` |
 | `RemoveDiacritics()` | `"ação".RemoveDiacritics()` | `"acao"` |
 | `OnlyDigits()` | `"(11) 99999-0000".OnlyDigits()` | `"11999990000"` |
+| `HasEmoji()` | `"Deploy pronto 🚀".HasEmoji()` | `true` |
+| `CountCharacters()` | `"🚀".CountCharacters()` | `1` |
+| `HasSpecialCharacters()` | `"abc@123".HasSpecialCharacters()` | `true` |
+| `RemoveSpecialCharacters()` | `"Ola, mundo!".RemoveSpecialCharacters()` | `"Ola mundo"` |
+| `ToBinary()` | `'A'.ToBinary()` | `"01000001"` |
+| `ToBinary()` | `"AB".ToBinary()` | `"01000001 01000010"` |
 | `Truncate(10)` | `"Manipulando".Truncate(10)` | `"Manipu..."` |
 | `Left(4)` | `"Kalel".Left(4)` | `"Kale"` |
 | `Right(3)` | `"Kalel".Right(3)` | `"lel"` |
@@ -61,14 +73,6 @@ dotnet add package StringForge
 | `CountOccurrences("a")` | `"banana".CountOccurrences("a")` | `3` |
 | `IsPalindrome()` | `"A base do teto desaba".IsPalindrome()` | `true` |
 | `Words()` | `"C# para .NET".Words()` | `["c", "para", "net"]` |
-
-## Ideias para viralizar o repositorio
-
-- Criar uma issue fixa com `good first issue` para novos metodos: `MaskCpf`, `MaskEmail`, `ToQueryString`, `Similarity`, `ExtractEmails`.
-- Publicar um artigo curto: "20 extensions de string em C# que eu cansei de reescrever".
-- Adicionar benchmarks com BenchmarkDotNet quando a API estabilizar.
-- Publicar no NuGet e adicionar badges de version, build e coverage no README.
-- Fazer posts com antes/depois: codigo verboso em C# puro vs. uma linha com StringForge.
 
 ## Referencias de estudo
 

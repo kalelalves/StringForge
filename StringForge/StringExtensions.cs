@@ -64,6 +64,71 @@ public static partial class StringExtensions
         return builder.ToString();
     }
 
+    public static bool HasEmoji(this string? value)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return false;
+        }
+
+        return value.EnumerateRunes().Any(IsEmoji);
+    }
+
+    public static int CountCharacters(this string? value)
+    {
+        return string.IsNullOrEmpty(value) ? 0 : new StringInfo(value).LengthInTextElements;
+    }
+
+    public static bool HasSpecialCharacters(this string? value, bool allowWhiteSpace = true)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return false;
+        }
+
+        return value.Any(character => IsSpecialCharacter(character, allowWhiteSpace));
+    }
+
+    public static string RemoveSpecialCharacters(this string? value, bool preserveWhiteSpace = true)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return string.Empty;
+        }
+
+        var builder = new StringBuilder(value.Length);
+
+        foreach (var character in value)
+        {
+            if (!IsSpecialCharacter(character, preserveWhiteSpace))
+            {
+                builder.Append(character);
+            }
+        }
+
+        return builder.ToString();
+    }
+
+    public static string ToBinary(this char value, int minBits = 8)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegative(minBits);
+
+        return Convert.ToString(value, 2).PadLeft(minBits, '0');
+    }
+
+    public static string ToBinary(this string? value, string separator = " ", int minBits = 8)
+    {
+        ArgumentNullException.ThrowIfNull(separator);
+        ArgumentOutOfRangeException.ThrowIfNegative(minBits);
+
+        if (string.IsNullOrEmpty(value))
+        {
+            return string.Empty;
+        }
+
+        return string.Join(separator, value.Select(character => character.ToBinary(minBits)));
+    }
+
     public static string Truncate(this string? value, int maxLength, string suffix = "...")
     {
         ArgumentOutOfRangeException.ThrowIfNegative(maxLength);
@@ -324,6 +389,20 @@ public static partial class StringExtensions
     private static string CapitalizeInvariant(string word)
     {
         return word.Length == 0 ? word : char.ToUpperInvariant(word[0]) + word[1..];
+    }
+
+    private static bool IsSpecialCharacter(char character, bool allowWhiteSpace)
+    {
+        return !char.IsLetterOrDigit(character) && (!allowWhiteSpace || !char.IsWhiteSpace(character));
+    }
+
+    private static bool IsEmoji(Rune rune)
+    {
+        var value = rune.Value;
+
+        return value is >= 0x1F000 and <= 0x1FAFF
+            or >= 0x2600 and <= 0x27BF
+            or >= 0x2300 and <= 0x23FF;
     }
 
     [GeneratedRegex(@"\s+")]

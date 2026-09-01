@@ -70,6 +70,53 @@ public class StringExtensionsTests
         Assert.Equal("11987654321", "+55 (11) 98765-4321".OnlyDigits().Right(11));
     }
 
+    [Theory]
+    [InlineData("Deploy pronto 🚀", true)]
+    [InlineData("Texto comum", false)]
+    public void HasEmoji_DetectsEmoji(string value, bool expected)
+    {
+        Assert.Equal(expected, value.HasEmoji());
+    }
+
+    [Theory]
+    [InlineData("abc", 3)]
+    [InlineData("🚀", 1)]
+    [InlineData("á", 1)]
+    public void CountCharacters_CountsTextElements(string value, int expected)
+    {
+        Assert.Equal(expected, value.CountCharacters());
+    }
+
+    [Theory]
+    [InlineData("abc123", true, false)]
+    [InlineData("abc 123", true, false)]
+    [InlineData("abc 123", false, true)]
+    [InlineData("abc@123", true, true)]
+    public void HasSpecialCharacters_DetectsSymbols(string value, bool allowWhiteSpace, bool expected)
+    {
+        Assert.Equal(expected, value.HasSpecialCharacters(allowWhiteSpace));
+    }
+
+    [Theory]
+    [InlineData("Ola, mundo! #2026", true, "Ola mundo 2026")]
+    [InlineData("Ola, mundo! #2026", false, "Olamundo2026")]
+    public void RemoveSpecialCharacters_RemovesSymbols(string value, bool preserveWhiteSpace, string expected)
+    {
+        Assert.Equal(expected, value.RemoveSpecialCharacters(preserveWhiteSpace));
+    }
+
+    [Fact]
+    public void ToBinary_ConvertsCharToBinary()
+    {
+        Assert.Equal("01000001", 'A'.ToBinary());
+    }
+
+    [Fact]
+    public void ToBinary_ConvertsStringToBinary()
+    {
+        Assert.Equal("01000001 01000010", "AB".ToBinary());
+    }
+
     [Fact]
     public void Initials_ReturnsUppercaseInitials()
     {
