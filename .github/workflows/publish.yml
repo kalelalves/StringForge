@@ -1,0 +1,63 @@
+name: Publish NuGet package
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Package version, for example 0.1.0
+        required: true
+        type: string
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Resolve package version
+        shell: pwsh
+        run: |
+          if ("${{ github.event_name }}" -eq "workflow_dispatch") {
+            $version = "${{ inputs.version }}"
+          } else {
+            $version = "${{ github.ref_name }}".TrimStart("v")
+          }
+
+          "PACKAGE_VERSION=$version" >> $env:GITHUB_ENV
+
+      - name: Restore
+        run: dotnet restore ./StringForge.slnx
+
+      - name: Build
+        run: dotnet build ./StringForge.slnx --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test ./StringForge.slnx --configuration Release --no-build
+
+      - name: Pack
+        run: dotnet pack ./StringForge/StringForge.csproj --configuration Release --no-build --output ./artifacts/packages /p:PackageVersion=${{ env.PACKAGE_VERSION }}
+
+      - name: NuGet login
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ vars.NUGET_USER }}
+
+      - name: Push to NuGet
+        run: dotnet nuget push "./artifacts/packages/*.nupkg" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate

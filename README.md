@@ -89,6 +89,30 @@ dotnet build
 dotnet test
 ```
 
+## Publicacao no NuGet
+
+Este repositorio usa GitHub Actions com NuGet Trusted Publishing, sem chave de API fixa.
+
+Antes da primeira publicacao, configure no NuGet.org:
+
+- Acesse sua conta no NuGet.org.
+- Abra Trusted Publishing.
+- Adicione uma policy de GitHub Actions.
+- Repository owner: `kalelalves`.
+- Repository: `StringForge`.
+- Workflow file: `publish.yml`.
+- Environment: deixe vazio.
+- Crie no GitHub uma repository variable chamada `NUGET_USER` com seu username do NuGet.org.
+
+Para publicar manualmente, abra o workflow `Publish NuGet package` no GitHub Actions e informe a versao.
+
+Para publicar por tag:
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
 ## Licenca
 
 MIT

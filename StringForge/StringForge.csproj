@@ -12,6 +12,8 @@
     <Description>Extensoes modernas, testadas e faceis de usar para manipulacao de strings em .NET.</Description>
     <PackageTags>dotnet;csharp;string;extensions;text;slug;case</PackageTags>
     <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/kalelalves/StringForge</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/kalelalves/StringForge</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
